@@ -5,7 +5,7 @@ import { PricingComponent } from './pricing/pricing.component';
 
 const routes: Routes = [
   {
-    path:'',pathMatch: 'full' ,redirectTo:'/pricing'
+    path:'',pathMatch: 'full' ,redirectTo:'pricing'
   },
   {path: 'pricing',component:PricingComponent}
 ];
