@@ -6,7 +6,7 @@ import { PricingComponent } from './pricing/pricing.component';
 
 const routes: Routes = [
   {
-    path:'',pathMatch: 'full' ,redirectTo:'select-file'
+    path:'',pathMatch: 'full' ,redirectTo:'/select-file'
   },
   {path : 'select-file', component:FirstPageComponent},
   {path: 'pricing',component:PricingComponent}
@@ -18,6 +18,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: false, onSameUrlNavigation: 'reload' })  
     
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [],
 })
 export class AppRoutingModule { }
