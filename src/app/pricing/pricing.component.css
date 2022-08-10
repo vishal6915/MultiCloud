@@ -154,8 +154,8 @@
       border: 2px solid orange;
       border-radius: 50px;
       max-width: 425px;
-      margin-left: 770px;
-      padding-top: 15px;
+      margin-left: 762px;
+      padding-top: 20px;
       text-align: center;
     }
     
@@ -176,6 +176,10 @@
     
     .first-row {
       padding: 12px 0 12px 20px;
+    }
+
+    .gcloud {
+      padding: 20px 0 0 0;
     }
     
     .cloud-data:nth-child(even) , .even, .cloud-data-of-second-third:nth-child(odd) {
@@ -245,4 +249,5 @@
     }
     .pdf-content{
       width:fit-content;
+      margin : 0 auto
     }

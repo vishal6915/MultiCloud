@@ -78,13 +78,19 @@ export class PricingComponent implements OnInit,Series {
 
 
   ngOnInit() {
+    ///passing parameters as input from a file
+    this.suggestion = "Google"
     this.activatedRoute.queryParams.subscribe((params: any)=>{
+     // console.log("data from route", params.data.split("  "))
+      let content =  params.data.split("  ");
+      console.log("content",content)
       this.complexitylength=params.data.length-1;
-      this.titleEnvName=params.data[0];
-      for(let i=1;i<params.data.length;i++){
-        this.archcomplexity=params.data[i];
+      this.titleEnvName=content[0];
+      for(let i=1;i<content.length;i++){
+        this.archcomplexity=content[i];
         this.pricingCalculation(this.archcomplexity);
       }
+      
 
     })
          
