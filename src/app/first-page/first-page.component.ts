@@ -11,7 +11,8 @@ export class FirstPageComponent implements OnInit {
   sendInputParams: any;
   arr : any;
 
-  or: string = ""
+  or: any = []
+  routeData: any;
   constructor(private routes : Router) { }
 
   ngOnInit() {
@@ -22,25 +23,29 @@ export class FirstPageComponent implements OnInit {
 
 }
 readThis(inputValue: any): void {
-  this.or="";
+ // this.or="";
   var file: File = inputValue.files[0];
   var myReader: FileReader = new FileReader();
   var fileType = inputValue.parentElement.id;
     myReader.onloadend = (e) => {
-      //console.log(myReader.result,'report data');
+      console.log(myReader.result,'report data');
       this.sendInputParams = myReader.result;
-      this.arr = this.sendInputParams.replaceAll(/\s/g,'')
-     // console.log(this.arr)
-      for(let i=1; i<this.arr.length-1;i++) {
-        if(this.arr[i] === '"' || this.arr[i] === "'" ) {
-          //console.log(i);
-          this.or += ' '
-          continue
-        }
-        this.or += this.arr[i]
+      //console.log(this.sendInputParams)
+      this.arr = this.sendInputParams.split('"')
+      console.log(this.arr)
+     // this.arr = this.sendInputParams
+     console.log(this.arr)
+      for(let i=1; i<this.arr.length-1;i+=2) {
+        // if(this.arr[i] === '"' || this.arr[i] === "'" ) {
+        //   //console.log(i);
+        //   this.or += ' '
+        //   continue
+        // }
+        this.or.push(this.arr[i])
       }
-      console.log(this.or.split('  '))
-      // console.log(this.sendInputParams)
+      //this.routeData= this.or.split('  ')
+      console.log("original data",this.or)
+     // console.log(this.sendInputParams)
       this.fileString = myReader.result as string;
     };
      

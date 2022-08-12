@@ -82,7 +82,7 @@ export class PricingComponent implements OnInit,Series {
     this.suggestion = "Google"
     this.activatedRoute.queryParams.subscribe((params: any)=>{
      // console.log("data from route", params.data.split("  "))
-      let content =  params.data.split("  ");
+      let content =  params.data;
       console.log("content",content)
       this.complexitylength=params.data.length-1;
       this.titleEnvName=content[0];
