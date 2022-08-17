@@ -25,15 +25,24 @@
       align-items: center;
       gap: 18.5px;
     } 
+    .image-wrapper{
+      width: 275px; 
+      border: 2px solid black;
+       border-radius: 50px; 
+       text-align: center;
+    }
     
     
     .image-wrap {
       object-fit: contain;
-      border: 2px solid black;
-      border-radius: 50px;
-      height: 45px;
-      width: 275px;
-      margin-bottom:-7px;
+      /* border: 2px solid black; */
+      /* border-radius: 50px; */
+     max-height:  45px;
+      /* width: 240px; */
+      width: auto;
+     
+      /* margin-bottom:-7px; */
+      /* margin-left: 4.2px; */
     }
     
     .space {
@@ -185,6 +194,7 @@
     .cloud-data:nth-child(even) , .even, .cloud-data-of-second-third:nth-child(odd) {
       background-color: lightgray;
     } 
+    
     
     .even-first, .border-rad-first {
       border-top-left-radius: 5px;
