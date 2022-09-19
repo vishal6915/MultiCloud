@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 //  import html2canvas from 'html2canvas';
  import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { CookieService } from 'ngx-cookie-service';
 
 
 export interface Series{
@@ -35,7 +36,8 @@ export class PricingComponent implements OnInit,Series {
   var:any;
   pdfmake: any;
 
-  constructor(private activatedRoute:ActivatedRoute) { }
+  constructor(private activatedRoute:ActivatedRoute,
+              public cookie:CookieService) { }
   armskuname1: any;
   armskuname2: any;
   armskuname3: any;
@@ -58,6 +60,7 @@ export class PricingComponent implements OnInit,Series {
   titleEnvName:any;
   data:Series=<any>[];
   suggestion:any;
+   content : any[]=[];
   
   
         
@@ -79,21 +82,26 @@ export class PricingComponent implements OnInit,Series {
 
   ngOnInit() {
     ///passing parameters as input from a file
-    this.suggestion = "Google"
-    this.activatedRoute.queryParams.subscribe((params: any)=>{
-     // console.log("data from route", params.data.split("  "))
-      let content =  params.data;
-      console.log("content",content)
-      this.complexitylength=params.data.length-1;
-      this.titleEnvName=content[0];
-      for(let i=1;i<content.length;i++){
-        this.archcomplexity=content[i];
-        this.pricingCalculation(this.archcomplexity);
-      }
+    //this.suggestion = "Google"
+    this.content = JSON.parse(this.cookie.get("key for pricing"));
+    // this.activatedRoute.queryParams.subscribe((params: any)=>{
+    //  // console.log("data from route", params.data.split("  "))
+    //   let content1 =  params.data;
+    //   console.log("content",content)
+    //   this.complexitylength=params.data.length-1;
+    //   this.titleEnvName=content[0];
+    //   for(let i=1;i<content.length;i++){
+    //     this.archcomplexity=content[i];
+    //     this.pricingCalculation(this.archcomplexity);
+    //   }
       
 
-    })
-         
+    // })
+          this.titleEnvName=this.content[0];
+      for(let i=1;i<this.content.length;i++){
+        this.archcomplexity=this.content[i];
+        this.pricingCalculation(this.archcomplexity);
+      }
     
   }
   pricingCalculation(e:any){
