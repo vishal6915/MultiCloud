@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { FirstPageComponent } from './first-page/first-page.component';
+import { CookieService } from 'ngx-cookie-service';
 //import { PricingComponent } from './pricing/pricing.component';
 
 @NgModule({
@@ -18,7 +19,7 @@ import { FirstPageComponent } from './first-page/first-page.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
