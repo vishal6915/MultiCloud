@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule } from '@angular/common/http';
+//import { PopupModule } from 'ng2-opd-popup';
 //import { PricingComponent } from './pricing/pricing.component';
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    //PopupModule.forRoot()
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

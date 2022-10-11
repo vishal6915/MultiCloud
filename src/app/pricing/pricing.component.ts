@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
  import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { CookieService } from 'ngx-cookie-service';
+import { ReportDataService } from '../report-data.service';
 
 
 export interface Series{
@@ -38,7 +39,8 @@ export class PricingComponent implements OnInit,Series {
 
   constructor(
     private activatedRoute:ActivatedRoute,
-    public cookie : CookieService) { }
+    public cookie : CookieService,
+    public reportDataService : ReportDataService) { }
   armskuname1: any;
   armskuname2: any;
   armskuname3: any;
@@ -62,7 +64,7 @@ export class PricingComponent implements OnInit,Series {
   data:Series=<any>[];
   suggestion:any;
   content : any[] = [];
-  
+  arrdata : any[] = [];
   
         
   images: any = [
@@ -84,30 +86,41 @@ export class PricingComponent implements OnInit,Series {
   ngOnInit() {
     ///passing parameters as input from a file
     this.suggestion = "Google"
-    this.cookieData();
-    // this.activatedRoute.queryParams.subscribe((params: any)=>{
-    //  // console.log("data from route", params.data.split("  "))
-    //   let content =  params.data;
-    //   console.log("content",content)
-    //   this.complexitylength=params.data.length-1;
-    //   this.titleEnvName=content[0];
-    //   for(let i=1;i<content.length;i++){
-    //     this.archcomplexity=content[i];
-    //     this.pricingCalculation(this.archcomplexity);
-    //   }
+    this.fillData();
+    console.log("in pricing")
+   
+  }
+    
       
 
-    // })
-    //      
     
-  }
-  cookieData(){
-    this.content = JSON.parse(this.cookie.get("key_for_priicng"))
-    this.titleEnvName=this.content[0];
-      for(let i=1;i<this.content.length;i++){
-        this.archcomplexity=this.content[i];
-        this.pricingCalculation(this.archcomplexity);
-      }
+  fillData(){
+    this.reportDataService.getArchData().subscribe((data:any) =>{
+      let len = (data.length - 1);
+      // to get the last item in array
+      console.log("len", len)
+      let itemsLen =  Object.keys(data[len]).length
+      // to get the no.of key pair values at a give index
+      console.log("data in get", data[len].Env_Name)
+      this.titleEnvName = data[len].Env_Name;
+     // console.log(data[len][1], "data item")
+        for(let i=2,j=1;i<itemsLen;i++,j++){
+          this.archcomplexity = data[len]['App_Arch_Complexity_'+j];
+          console.log("inside for loop",this.archcomplexity)
+          this.pricingCalculation(this.archcomplexity);
+          
+        }
+      //this.arrdata = data[0].Arch_Complexity.split('"');
+      // this.complexitylength= this.arrdata.length;
+      // for(let i=1;i<this.complexitylength;i=i+1){
+      //    this.archcomplexity= this.arrdata[i];
+      //    this.pricingCalculation(this.archcomplexity);
+
+      // }
+
+      //console.log("complexity data in api", data[0].Arch_Complexity)
+
+    });
   }
   pricingCalculation(e:any){
       if(e=="Simple"){

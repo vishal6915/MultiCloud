@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+//import { Popup } from 'ng2-opd-popup/components';
 
 @Component({
   selector: 'app-first-page',
@@ -13,7 +14,9 @@ export class FirstPageComponent implements OnInit {
 
   or: any = []
   routeData: any;
-  constructor(private routes : Router) { }
+  constructor(private routes : Router,
+   // private popup : Popup
+   ) { }
 
   ngOnInit() {
   }
@@ -52,6 +55,8 @@ readThis(inputValue: any): void {
     myReader.readAsText(file);
   }
   pricing(){
-     this.routes.navigate(['pricing'],{queryParams:{data:this.or} })
+     this.routes.navigate(['pricing']
+    //  ,{queryParams:{data:this.or} }
+     )
   }
 }
