@@ -57,6 +57,6 @@ export class FirstPageComponent implements OnInit {
     myReader.readAsText(file);
   }
   pricing() {
-    this.popupService.updateData(true,5000,"this is my popup message",true,"pricing");
+    this.popupService.updateData(true,5000,"this is my popup message saying hello",true,"pricing");
   }
 }

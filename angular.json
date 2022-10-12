@@ -19,7 +19,7 @@
               "rgbcolor",
               "html2canvas"
               ],
-            "outputPath": "dist/multi-cloud-roi",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -100,6 +100,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
