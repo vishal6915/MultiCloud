@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PopupService } from '../services/popup.service';
 //import { Popup } from 'ng2-opd-popup/components';
 
 @Component({
@@ -10,13 +11,14 @@ import { Router } from '@angular/router';
 export class FirstPageComponent implements OnInit {
   public fileString: any;
   sendInputParams: any;
-  arr : any;
+  arr: any;
 
   or: any = []
   routeData: any;
-  constructor(private routes : Router,
-   // private popup : Popup
-   ) { }
+  constructor(
+    private routes: Router,
+    private popupService: PopupService
+  ) { }
 
   ngOnInit() {
   }
@@ -24,21 +26,21 @@ export class FirstPageComponent implements OnInit {
     this.readThis(event.target);
 
 
-}
-readThis(inputValue: any): void {
- // this.or="";
-  var file: File = inputValue.files[0];
-  var myReader: FileReader = new FileReader();
-  var fileType = inputValue.parentElement.id;
+  }
+  readThis(inputValue: any): void {
+    // this.or="";
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+    var fileType = inputValue.parentElement.id;
     myReader.onloadend = (e) => {
-      console.log(myReader.result,'report data');
+      console.log(myReader.result, 'report data');
       this.sendInputParams = myReader.result;
       //console.log(this.sendInputParams)
       this.arr = this.sendInputParams.split('"')
       console.log(this.arr)
-     // this.arr = this.sendInputParams
-     console.log(this.arr)
-      for(let i=1; i<this.arr.length-1;i+=2) {
+      // this.arr = this.sendInputParams
+      console.log(this.arr)
+      for (let i = 1; i < this.arr.length - 1; i += 2) {
         // if(this.arr[i] === '"' || this.arr[i] === "'" ) {
         //   //console.log(i);
         //   this.or += ' '
@@ -47,16 +49,14 @@ readThis(inputValue: any): void {
         this.or.push(this.arr[i])
       }
       //this.routeData= this.or.split('  ')
-      console.log("original data",this.or)
-     // console.log(this.sendInputParams)
+      console.log("original data", this.or)
+      // console.log(this.sendInputParams)
       this.fileString = myReader.result as string;
     };
-     
+
     myReader.readAsText(file);
   }
-  pricing(){
-     this.routes.navigate(['pricing']
-    //  ,{queryParams:{data:this.or} }
-     )
+  pricing() {
+    this.popupService.updateData(true,5000,"this is my popup message",true,"pricing");
   }
 }
